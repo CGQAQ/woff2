@@ -31,6 +31,8 @@ if ("${isSystemDir}" STREQUAL "-1")
   set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_LIBDIR}")
 endif()
 
+set(BUILD_SHARED_LIBS OFF)
+
 add_subdirectory(brotli)
 
 # Set compiler flags
@@ -70,7 +72,7 @@ add_library(woff2dec
             STATIC
             src/woff2_dec.cc
             src/woff2_out.cc)
-target_link_libraries(woff2dec woff2common brotlidec-static)
+target_link_libraries(woff2dec woff2common brotlidec)
 add_executable(woff2_decompress src/woff2_decompress.cc)
 target_link_libraries(woff2_decompress woff2dec)
 
@@ -82,7 +84,7 @@ add_library(woff2enc
             src/normalize.cc
             src/transform.cc
             src/woff2_enc.cc)
-target_link_libraries(woff2enc woff2common brotlienc-static)
+target_link_libraries(woff2enc woff2common brotlienc)
 add_executable(woff2_compress src/woff2_compress.cc)
 target_link_libraries(woff2_compress woff2enc)
 
